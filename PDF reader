@@ -1,0 +1,18 @@
+#this code helps read lengthy pdf files
+#it is a good tool for people with bad eyesight as well as those with no means to get their hands on reading
+#install python and pyttsx3,PyPDF2 before writing this code in your Visual Studio Code
+
+import pyttsx3,PyPDF2
+
+pdfreader = PyPDF2.PdfFileReader(open('readme.pdf', 'rb'))
+speaker = pyttsx3.init()
+
+for page_num in range(pdfreader.numPages):
+    text = pdfreader.getPage(page_num).extractText()
+    clean_text = text.strip().replace('\n', ' ')
+    print(clean_text)
+#name mp3 file and save it
+speaker.save_to_file(clean_text, 'playreadme.mp3')
+speaker.runAndWait()
+
+speaker.stop()
